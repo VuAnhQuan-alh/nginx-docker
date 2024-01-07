@@ -1,17 +1,12 @@
+import { CommonModule } from '@app/common';
 import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { AppLoggerMiddleware } from './common/logger-middleware';
+import { AppLoggerMiddleware } from './middleware/logger-request';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-    }),
-  ],
+  imports: [CommonModule],
   controllers: [AppController],
   providers: [AppService],
 })
