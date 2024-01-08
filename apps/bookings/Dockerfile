@@ -1,11 +1,5 @@
 # path /Dockerfile
 
-# FROM node:20-alpine
-# WORKDIR /app
-# COPY . .
-# RUN yarn install && yarn build
-# CMD ["node", "dist/main"]
-
 FROM node:20-alpine as development
 WORKDIR /usr/src/app
 COPY --chown=node:node ./package.json ./yarn.lock ./

@@ -6,10 +6,10 @@ import { MongooseModule } from '@nestjs/mongoose';
   imports: [
     MongooseModule.forRootAsync({
       useFactory: (config: ConfigService) => ({
-        uri: config.get<string>('MONGOOSE_URI'),
+        uri: config.get<string>('MONGOOSE_URI_BOOKING'),
       }),
       inject: [ConfigService],
     }),
   ],
 })
-export class DatabaseModule {}
+export class DatabaseBookingModule {}

@@ -8,8 +8,8 @@ import * as Joi from 'joi';
       isGlobal: true,
       envFilePath: '.env',
       validationSchema: Joi.object({
-        PORT: Joi.number().required(),
-        MONGOOSE_URI: Joi.string().required(),
+        PORT_PET: Joi.number().required(),
+        MONGOOSE_URI_PET: Joi.string().required(),
       }),
     }),
   ],
