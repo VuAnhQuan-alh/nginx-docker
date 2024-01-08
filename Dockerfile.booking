@@ -20,5 +20,7 @@ ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist/apps/bookings ./dist/apps/bookings
+RUN ls 
+
 
 CMD ["node", "dist/apps/bookings/main"]

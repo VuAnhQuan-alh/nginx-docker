@@ -23,6 +23,12 @@
       ],
       "@libs/common/*": [
         "libs/common/src/*"
+      ],
+      "@micro/microservice": [
+        "libs/microservice/src"
+      ],
+      "@micro/microservice/*": [
+        "libs/microservice/src/*"
       ]
     }
   }

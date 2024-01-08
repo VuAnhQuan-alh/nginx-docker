@@ -43,6 +43,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/admin/tsconfig.app.json"
       }
+    },
+    "microservice": {
+      "type": "library",
+      "root": "libs/microservice",
+      "entryFile": "index",
+      "sourceRoot": "libs/microservice/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/microservice/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,

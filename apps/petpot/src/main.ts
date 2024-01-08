@@ -4,6 +4,7 @@ import { VAR_PREFIX } from '@libs/common/constants';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +13,8 @@ async function bootstrap() {
   app.setGlobalPrefix(VAR_PREFIX);
   await app.listen(process.env.PORT_PET);
 
-  console.log(`Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`);
+  Logger.log(
+    `🚀 Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`,
+  );
 }
 bootstrap();
