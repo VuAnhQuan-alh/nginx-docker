@@ -28,7 +28,4 @@ export class AbstractDocument {
 
   @Prop({ default: now() })
   updatedAt: Date;
-
-  @Prop({ default: null })
-  deletedAt: Date;
 }
