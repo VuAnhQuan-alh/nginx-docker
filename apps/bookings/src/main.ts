@@ -12,8 +12,6 @@ async function bootstrap() {
   app.setGlobalPrefix(VAR_PREFIX);
   await app.listen(process.env.PORT_BOOING);
 
-  console.log(
-    `Application is running on: ${await app.getUrl()}/booking/api/v1`,
-  );
+  console.log(`Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`);
 }
 bootstrap();

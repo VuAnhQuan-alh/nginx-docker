@@ -12,6 +12,6 @@ async function bootstrap() {
   app.setGlobalPrefix(VAR_PREFIX);
   await app.listen(process.env.PORT_PET);
 
-  console.log(`Application is running on: ${await app.getUrl()}/petpot/api/v1`);
+  console.log(`Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`);
 }
 bootstrap();

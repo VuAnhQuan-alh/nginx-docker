@@ -1,8 +1,14 @@
-import { Injectable, Logger, NestMiddleware } from '@nestjs/common';
+import {
+  Injectable,
+  Logger,
+  MiddlewareConsumer,
+  NestMiddleware,
+  NestModule,
+} from '@nestjs/common';
 import { Request, Response, NextFunction } from 'express';
 
 @Injectable()
-export class AppLoggerMiddleware implements NestMiddleware {
+class AppLoggerMiddleware implements NestMiddleware {
   private logger = new Logger('HTTP');
 
   use(request: Request, response: Response, next: NextFunction) {
@@ -29,5 +35,11 @@ export class AppLoggerMiddleware implements NestMiddleware {
     });
 
     next();
+  }
+}
+
+export class AppLoggerModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    consumer.apply(AppLoggerMiddleware).forRoutes('*');
   }
 }

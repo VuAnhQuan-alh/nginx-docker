@@ -11,5 +11,7 @@ async function bootstrap() {
   app.use(helmet());
   app.setGlobalPrefix(VAR_PREFIX);
   await app.listen(process.env.PORT_ADMIN);
+
+  console.log(`Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`);
 }
 bootstrap();
