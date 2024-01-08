@@ -10,6 +10,7 @@
     "format": "prettier --write \"apps/**/*.ts\" \"libs/**/*.ts\"",
     "start:petpot": "nest start petpot --watch",
     "start:booking": "nest start bookings --watch",
+    "start:admin": "nest start admin --watch",
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",

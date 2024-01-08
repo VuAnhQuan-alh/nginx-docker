@@ -10,6 +10,12 @@ import * as Joi from 'joi';
       validationSchema: Joi.object({
         PORT_PET: Joi.number().required(),
         MONGOOSE_URI_PET: Joi.string().required(),
+
+        PORT_BOOKING: Joi.number().required(),
+        MONGOOSE_URI_BOOKING: Joi.string().required(),
+
+        PORT_ADMIN: Joi.number().required(),
+        MONGOOSE_URI_ADMIN: Joi.string().required(),
       }),
     }),
   ],
