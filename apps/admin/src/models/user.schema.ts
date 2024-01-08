@@ -1,19 +1,24 @@
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Exclude } from 'class-transformer';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
-export type TypeUserDocument = User & Document;
+export type TypeUserDocument = UserDocument & Document;
 
-@Schema()
-export class User extends AbstractDocument {
+@Schema({ timestamps: true })
+export class UserDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
+  @IsString()
+  @IsNotEmpty()
   username: string;
 
   @Prop({ default: null })
+  @IsString()
+  @IsOptional()
   fullName: string;
 
   @Prop({ required: true })
-  @Exclude()
+  @IsString()
+  @IsNotEmpty()
   password: string;
 }
-export const UserSchema = SchemaFactory.createForClass(User);
+export const UserSchema = SchemaFactory.createForClass(UserDocument);

@@ -46,6 +46,19 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     )) as unknown as TDocument[];
   }
 
+  async findAndCount(
+    query: FilterQuery<TDocument>,
+  ): Promise<[TDocument[], number]> {
+    return [
+      (await this.model.find(
+        query,
+        {},
+        { lean: true },
+      )) as unknown as TDocument[],
+      await this.model.countDocuments(query, { lean: true }),
+    ];
+  }
+
   async findOneAndDelete(query: FilterQuery<TDocument>) {
     return await this.model.findOneAndDelete(query, { lean: true });
   }

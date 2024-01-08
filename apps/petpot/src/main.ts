@@ -1,6 +1,6 @@
 import helmet from 'helmet';
 
-import { VAR_PREFIX } from '@libs/common/constants';
+import { VAR_PREFIX } from '@libs/common/constant';
 import { NestFactory } from '@nestjs/core';
 
 import { AppModule } from './app.module';

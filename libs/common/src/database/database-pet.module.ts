@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { DatabaseModuleDefinitions } from './database.module';
 
 @Module({
   imports: [
@@ -12,4 +13,4 @@ import { MongooseModule } from '@nestjs/mongoose';
     }),
   ],
 })
-export class DatabasePetModule {}
+export class DatabasePetModule extends DatabaseModuleDefinitions {}
