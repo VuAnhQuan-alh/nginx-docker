@@ -33,8 +33,6 @@ services:
       - kafka
     ports:
       - 4050:4050
-    # volumes:
-    #   - .:/usr/src/app
 
   booking:
     build:
@@ -42,10 +40,11 @@ services:
       dockerfile: ./Dockerfile.booking
     env_file:
       - .env
+    depends_one:
+      - zookeeper
+      - kafka
     ports:
       - 4070:4070
-  # volumes:
-  #   - .:/usr/src/app
 
   petpot:
     build:
@@ -58,5 +57,3 @@ services:
       - kafka
     ports:
       - 4030:4030
-    # volumes:
-    #   - .:/usr/src/app
