@@ -12,7 +12,7 @@ async function bootstrap() {
   app.enableCors();
   app.use(helmet());
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
   app.setGlobalPrefix(VAR_PREFIX);

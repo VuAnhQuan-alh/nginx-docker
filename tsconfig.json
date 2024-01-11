@@ -29,6 +29,12 @@
       ],
       "@micro/microservice/*": [
         "libs/microservice/src/*"
+      ],
+      "auth/passports": [
+        "libs/passports/src"
+      ],
+      "auth/passports/*": [
+        "libs/passports/src/*"
       ]
     }
   }

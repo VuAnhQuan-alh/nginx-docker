@@ -16,6 +16,8 @@ import * as Joi from 'joi';
 
         PORT_ADMIN: Joi.number().required(),
         MONGOOSE_URI_ADMIN: Joi.string().required(),
+
+        JWT_SECRET: Joi.string().required(),
       }),
     }),
   ],

@@ -52,6 +52,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/microservice/tsconfig.lib.json"
       }
+    },
+    "passports": {
+      "type": "library",
+      "root": "libs/passports",
+      "entryFile": "index",
+      "sourceRoot": "libs/passports/src",
+      "compilerOptions": {
+        "tsConfigPath": "libs/passports/tsconfig.lib.json"
+      }
     }
   },
   "monorepo": true,
