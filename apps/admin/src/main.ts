@@ -8,9 +8,12 @@ import { AdminModule } from './admin.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from '@libs/common/middleware/http-exception';
 import * as cookieParser from 'cookie-parser';
+import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AdminModule);
+  app.connectMicroservice({ transport: Transport.TCP });
+
   app.enableCors();
   app.use(helmet());
   app.use(cookieParser());
@@ -20,6 +23,8 @@ async function bootstrap() {
 
   app.setGlobalPrefix(VAR_PREFIX, { exclude: ['healthy'] });
   const config = app.get(ConfigService);
+
+  await app.startAllMicroservices();
   await app.listen(config.get<number>('PORT_ADMIN'));
 
   Logger.log(

@@ -11,6 +11,7 @@ import { LocalAuthGuard } from '@auth/passports/local-auth.guard';
 import { CurrentUser } from './models/users.decorator';
 import { UserDocument } from './models/user.schema';
 import { Response } from 'express';
+import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';
 
 @Controller()
 export class AdminController {
@@ -33,5 +34,11 @@ export class AdminController {
       message: 'Login to admin successful!',
       statusCode: HttpStatus.OK,
     };
+  }
+
+  @Get('profile')
+  @UseGuards(JwtAuthGuard)
+  async information(@CurrentUser() user: UserDocument) {
+    console.log('user', user);
   }
 }

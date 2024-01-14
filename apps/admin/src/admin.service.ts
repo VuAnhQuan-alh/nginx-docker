@@ -1,8 +1,9 @@
 import { Response } from 'express';
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserDocument } from './models/user.schema';
 import { ConfigService } from '@nestjs/config';
 import { PassportsService } from '@auth/passports';
+import { ITokenPayload } from '@auth/passports/interfaces/token-payload.interface';
 
 @Injectable()
 export class AdminService {
@@ -17,10 +18,12 @@ export class AdminService {
 
   async login(user: UserDocument, response: Response) {
     try {
-      const tokenPayload = {
+      const tokenPayload: ITokenPayload = {
         userId: user._id.toHexString(),
       };
       const token = this.jwtService.sign(tokenPayload);
+      console.log('token', token);
+
       const expires = new Date();
       expires.setSeconds(
         expires.getSeconds() + this.config.get<number>('JWT_EXPIRES'),
@@ -31,7 +34,9 @@ export class AdminService {
       });
       response.send(user);
     } catch (error) {
-      throw new UnauthorizedException(error);
+      console.log('error:', error.message);
+
+      throw new BadRequestException(error);
     }
   }
 }
