@@ -18,6 +18,7 @@ import * as Joi from 'joi';
         MONGOOSE_URI_ADMIN: Joi.string().required(),
 
         JWT_SECRET: Joi.string().required(),
+        JWT_EXPIRES: Joi.number().required(),
       }),
     }),
   ],

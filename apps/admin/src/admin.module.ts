@@ -6,10 +6,11 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { AppLoggerModule } from '@libs/common/middleware/logger-request';
 import { UsersModule } from './users/users.module';
+import { PassportsModule, PassportsService } from '@auth/passports';
 
 @Module({
-  imports: [CommonModule, DatabaseAdminModule, UsersModule],
+  imports: [CommonModule, DatabaseAdminModule, UsersModule, PassportsModule],
   controllers: [AdminController],
-  providers: [AdminService],
+  providers: [AdminService, PassportsService],
 })
 export class AdminModule extends AppLoggerModule {}

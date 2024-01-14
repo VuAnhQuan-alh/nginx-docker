@@ -28,12 +28,14 @@ export class TransformInterceptor implements NestInterceptor {
   intercept(
     context: ExecutionContext,
     next: CallHandler,
-  ): Observable<Response> {
+  ): Observable<Response | BodyRes> {
     let meta: Meta | object;
 
     return next.handle().pipe(
       map((data: BodyRes) => {
         const query = context.switchToHttp().getRequest().query;
+        const url = context.switchToHttp().getRequest().url;
+        if (url === '/healthy') return data;
 
         if (data.data instanceof Array) {
           meta = {

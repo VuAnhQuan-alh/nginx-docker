@@ -27,7 +27,7 @@ export class UserDocument extends AbstractDocument {
   @IsOptional()
   fullName: string;
 
-  @Prop({ required: true, select: false })
+  @Prop({ required: true })
   @IsStrongPassword()
   @IsString()
   @IsNotEmpty()
