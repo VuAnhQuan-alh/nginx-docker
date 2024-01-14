@@ -1,7 +1,7 @@
 import {
+  BadRequestException,
   Controller,
   Get,
-  HttpStatus,
   Post,
   Res,
   UseGuards,
@@ -28,17 +28,16 @@ export class AdminController {
     @Res({ passthrough: true }) response: Response,
     @CurrentUser() user: UserDocument,
   ) {
-    await this.adminService.login(user, response);
-    return {
-      data: user,
-      message: 'Login to admin successful!',
-      statusCode: HttpStatus.OK,
-    };
+    return await this.adminService.login(user);
   }
 
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   async information(@CurrentUser() user: UserDocument) {
-    console.log('user', user);
+    try {
+      return { data: user, message: 'Get profile successful!' };
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
   }
 }

@@ -7,7 +7,6 @@ import { NestFactory } from '@nestjs/core';
 import { AdminModule } from './admin.module';
 import { Logger, ValidationPipe } from '@nestjs/common';
 import { HttpExceptionFilter } from '@libs/common/middleware/http-exception';
-import * as cookieParser from 'cookie-parser';
 import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
@@ -16,7 +15,6 @@ async function bootstrap() {
 
   app.enableCors();
   app.use(helmet());
-  app.use(cookieParser());
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());

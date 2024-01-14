@@ -1,4 +1,3 @@
-import { Response } from 'express';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { UserDocument } from './models/user.schema';
 import { ConfigService } from '@nestjs/config';
@@ -16,26 +15,19 @@ export class AdminService {
     return 'Hello World ADMIN SERVICE\n';
   }
 
-  async login(user: UserDocument, response: Response) {
+  async login(user: UserDocument) {
     try {
       const tokenPayload: ITokenPayload = {
         userId: user._id.toHexString(),
       };
-      const token = this.jwtService.sign(tokenPayload);
-      console.log('token', token);
-
-      const expires = new Date();
-      expires.setSeconds(
-        expires.getSeconds() + this.config.get<number>('JWT_EXPIRES'),
-      );
-      response.cookie('Authentication', token, {
-        httpOnly: true,
-        expires,
+      const token = this.jwtService.sign(tokenPayload, {
+        secret: this.config.get<string>('JWT_SECRET'),
       });
-      response.send(user);
+      return {
+        data: { profile: user, token },
+        message: 'Login to PetPot successful!',
+      };
     } catch (error) {
-      console.log('error:', error.message);
-
       throw new BadRequestException(error);
     }
   }
