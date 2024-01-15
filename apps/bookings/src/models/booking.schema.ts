@@ -1,12 +1,13 @@
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Promotion, PromotionSchema } from './promotion.schema';
+import { PromotionDocument, PromotionSchema } from './promotion.schema';
 import { Type } from 'class-transformer';
+import { ServiceDocument } from './service.schema';
 
-export type TypeBookingDocument = Booking & Document;
+export type TypeBookingDocument = BookingDocument & Document;
 
 @Schema()
-export class Booking extends AbstractDocument {
+export class BookingDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
   code: string;
 
@@ -16,14 +17,15 @@ export class Booking extends AbstractDocument {
   @Prop({ default: null })
   time: Date;
 
-  @Prop({ type: [String], default: () => [] })
-  services: string[];
+  @Prop({ type: [ServiceDocument] })
+  @Type(() => ServiceDocument)
+  services: ServiceDocument[];
 
   @Prop({ type: [PromotionSchema] })
-  @Type(() => Promotion)
-  promotion: Promotion[];
+  @Type(() => PromotionDocument)
+  promotion: PromotionDocument[];
 
   @Prop({ required: true })
   staffId: string;
 }
-export const BookingSchema = SchemaFactory.createForClass(Booking);
+export const BookingSchema = SchemaFactory.createForClass(BookingDocument);

@@ -2,13 +2,13 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 
 import * as bcrypt from 'bcryptjs';
 import { UserDocument } from '../models/user.schema';
-import { CreateUserDTO } from './dto/create-user.dto';
-import { UpdateUserDTO } from './dto/update-user.dto';
-import { UsersRepository } from '../models/users.repository';
+import { CreateUserDTO } from '../dto/create-user.dto';
+import { UpdateUserDTO } from '../dto/update-user.dto';
+import { UserRepository } from '../models/user.repository';
 
 @Injectable()
 export class UsersService {
-  constructor(private readonly userRepo: UsersRepository) {}
+  constructor(private readonly userRepo: UserRepository) {}
 
   async create(data: CreateUserDTO): Promise<UserDocument> {
     const salt = await bcrypt.genSalt(10);

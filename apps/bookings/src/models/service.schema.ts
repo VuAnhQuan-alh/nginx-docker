@@ -1,10 +1,10 @@
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
-export type TypeServiceDocument = Service & Document;
+export type TypeServiceDocument = ServiceDocument & Document;
 
 @Schema()
-export class Service extends AbstractDocument {
+export class ServiceDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
   code: string;
 
@@ -23,4 +23,4 @@ export class Service extends AbstractDocument {
   @Prop({ default: null })
   endDate: Date;
 }
-export const ServiceSchema = SchemaFactory.createForClass(Service);
+export const ServiceSchema = SchemaFactory.createForClass(ServiceDocument);

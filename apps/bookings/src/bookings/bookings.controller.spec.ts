@@ -3,20 +3,18 @@ import { BookingsController } from './bookings.controller';
 import { BookingsService } from './bookings.service';
 
 describe('BookingsController', () => {
-  let bookingsController: BookingsController;
+  let controller: BookingsController;
 
   beforeEach(async () => {
-    const app: TestingModule = await Test.createTestingModule({
+    const module: TestingModule = await Test.createTestingModule({
       controllers: [BookingsController],
       providers: [BookingsService],
     }).compile();
 
-    bookingsController = app.get<BookingsController>(BookingsController);
+    controller = module.get<BookingsController>(BookingsController);
   });
 
-  describe('root', () => {
-    it('should return "Hello World!"', () => {
-      expect(bookingsController.getHello()).toBe('Hello World!');
-    });
+  it('should be defined', () => {
+    expect(controller).toBeDefined();
   });
 });

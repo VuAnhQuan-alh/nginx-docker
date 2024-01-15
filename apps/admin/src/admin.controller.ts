@@ -8,7 +8,7 @@ import {
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
 import { LocalAuthGuard } from '@auth/passports/local-auth.guard';
-import { CurrentUser } from './models/users.decorator';
+import { CurrentUser } from './models/user.decorator';
 import { UserDocument } from './models/user.schema';
 import { Response } from 'express';
 import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';

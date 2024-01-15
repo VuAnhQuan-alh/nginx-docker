@@ -1,0 +1,38 @@
+import { CommonService } from '@libs/common';
+import { CreatePromotionDTO } from '../dto/create-promotion.dto';
+import { Injectable } from '@nestjs/common';
+import { PromotionDocument } from '../models/promotion.schema';
+import { PromotionRepository } from '../models/promotion.repository';
+import { UpdatePromotionDTO } from '../dto/update-promotion.dto';
+
+@Injectable()
+export class PromotionsService {
+  constructor(
+    private readonly promotionRepo: PromotionRepository,
+    private readonly common: CommonService,
+  ) {}
+
+  async create(data: CreatePromotionDTO): Promise<PromotionDocument> {
+    const code = this.common.getCodeHell('PROM');
+    return await this.promotionRepo.create({ ...data, code });
+  }
+
+  async findAll(): Promise<[PromotionDocument[], number]> {
+    return await this.promotionRepo.findAndCount({});
+  }
+
+  async findOne(_id: string): Promise<PromotionDocument> {
+    return await this.promotionRepo.findOne({ _id });
+  }
+
+  async update(
+    _id: string,
+    data: UpdatePromotionDTO,
+  ): Promise<PromotionDocument> {
+    return await this.promotionRepo.findOneAndUpdate({ _id }, data);
+  }
+
+  async remove(_id: string) {
+    return await this.promotionRepo.findOneAndDelete({ _id });
+  }
+}
