@@ -3,10 +3,26 @@ import { Module } from '@nestjs/common';
 import { CommonService } from './common.service';
 import { ConfigModule } from './config/config.module';
 import { InterceptorModule } from './interceptor/interceptor.module';
+import { ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
-  imports: [ConfigModule, InterceptorModule],
+  imports: [
+    ConfigModule,
+    InterceptorModule,
+    JwtModule.registerAsync({
+      useFactory: (config: ConfigService) => {
+        return {
+          secret: config.get<string>('JWT_SECRET'),
+          signOptions: {
+            expiresIn: `${config.get<number>('JWT_EXPIRES')}s`,
+          },
+        };
+      },
+      inject: [ConfigService],
+    }),
+  ],
   providers: [CommonService],
-  exports: [CommonService],
+  exports: [CommonService, JwtModule],
 })
 export class CommonModule {}

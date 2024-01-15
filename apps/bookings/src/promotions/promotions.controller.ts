@@ -29,19 +29,22 @@ export class PromotionsController {
   }
 
   @Get(':id')
-  async findUser(@Param('id') id: string) {
+  async findPromotion(@Param('id') id: string) {
     const data = await this.promotionsService.findOne(id);
     return { data, message: MessageQuery.GET_ONE_SUCCESS };
   }
 
   @Put(':id')
-  async updateUser(@Param('id') id: string, @Body() data: UpdatePromotionDTO) {
+  async updatePromotion(
+    @Param('id') id: string,
+    @Body() data: UpdatePromotionDTO,
+  ) {
     const result = await this.promotionsService.update(id, data);
     return { data: result, message: MessageQuery.UPDATE_SUCCESS };
   }
 
-  @Delete('id')
-  async remotePromotion(@Param('id') id: string) {
+  @Delete(':id')
+  async removePromotion(@Param('id') id: string) {
     const data = await this.promotionsService.remove(id);
     return { data, message: MessageQuery.REMOVE_SUCCESS };
   }

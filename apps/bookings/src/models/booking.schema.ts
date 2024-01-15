@@ -1,31 +1,49 @@
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { PromotionDocument } from './promotion.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { PromotionDocument, PromotionSchema } from './promotion.schema';
-import { Type } from 'class-transformer';
+import { SchemaTypes } from 'mongoose';
 import { ServiceDocument } from './service.schema';
+import { Type } from 'class-transformer';
+import {
+  IsArray,
+  IsDateString,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export type TypeBookingDocument = BookingDocument & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class BookingDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
   code: string;
 
   @Prop({ type: [String], default: () => [] })
+  @IsNotEmpty()
+  @IsArray()
   petIds: string[];
 
-  @Prop({ default: null })
+  @Prop({ required: true })
+  @IsNotEmpty()
+  @IsDateString()
   time: Date;
 
-  @Prop({ type: [ServiceDocument] })
+  @Prop({ type: [SchemaTypes.ObjectId], ref: ServiceDocument.name })
   @Type(() => ServiceDocument)
+  @IsNotEmpty()
+  @IsArray()
   services: ServiceDocument[];
 
-  @Prop({ type: [PromotionSchema] })
+  @Prop({ type: [SchemaTypes.ObjectId], ref: PromotionDocument.name })
   @Type(() => PromotionDocument)
+  @IsOptional()
+  @IsArray()
   promotion: PromotionDocument[];
 
   @Prop({ required: true })
+  @IsString()
+  @IsNotEmpty()
   staffId: string;
 }
 export const BookingSchema = SchemaFactory.createForClass(BookingDocument);

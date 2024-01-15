@@ -11,7 +11,15 @@ import { Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
   const app = await NestFactory.create(AdminModule);
-  app.connectMicroservice({ transport: Transport.TCP });
+  const config = app.get(ConfigService);
+
+  app.connectMicroservice({
+    transport: Transport.TCP,
+    options: {
+      host: '0.0.0.0',
+      port: config.get<number>('TCP_PORT'),
+    },
+  });
 
   app.enableCors();
   app.use(helmet());
@@ -20,7 +28,6 @@ async function bootstrap() {
   app.useGlobalFilters(new HttpExceptionFilter());
 
   app.setGlobalPrefix(VAR_PREFIX, { exclude: ['healthy'] });
-  const config = app.get(ConfigService);
 
   await app.startAllMicroservices();
   await app.listen(config.get<number>('PORT_ADMIN'));

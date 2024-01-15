@@ -9,11 +9,11 @@ import { UpdatePromotionDTO } from '../dto/update-promotion.dto';
 export class PromotionsService {
   constructor(
     private readonly promotionRepo: PromotionRepository,
-    private readonly common: CommonService,
+    private readonly commonService: CommonService,
   ) {}
 
   async create(data: CreatePromotionDTO): Promise<PromotionDocument> {
-    const code = this.common.getCodeHell('PROM');
+    const code = this.commonService.getCodeHell('prom');
     return await this.promotionRepo.create({ ...data, code });
   }
 

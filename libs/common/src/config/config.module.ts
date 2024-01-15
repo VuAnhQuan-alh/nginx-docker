@@ -19,8 +19,11 @@ import * as Joi from 'joi';
 
         JWT_SECRET: Joi.string().required(),
         JWT_EXPIRES: Joi.number().required(),
+
+        TCP_PORT: Joi.number().required(),
       }),
     }),
   ],
+  exports: [NestConfig],
 })
 export class ConfigModule {}

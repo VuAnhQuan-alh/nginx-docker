@@ -1,6 +1,12 @@
 import { Logger, NotFoundException } from '@nestjs/common';
 import { AbstractDocument } from './abstract.schema';
-import { FilterQuery, Model, Types, UpdateQuery } from 'mongoose';
+import {
+  FilterQuery,
+  Model,
+  PopulateOptions,
+  Types,
+  UpdateQuery,
+} from 'mongoose';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
@@ -48,13 +54,12 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
 
   async findAndCount(
     query: FilterQuery<TDocument>,
+    populate?: PopulateOptions[],
   ): Promise<[TDocument[], number]> {
     return [
-      (await this.model.find(
-        query,
-        {},
-        { lean: true },
-      )) as unknown as TDocument[],
+      (await this.model
+        .find(query, {}, { lean: true })
+        .populate(populate)) as unknown as TDocument[],
       await this.model.countDocuments(query, { lean: true }),
     ];
   }

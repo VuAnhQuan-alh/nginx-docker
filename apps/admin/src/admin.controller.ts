@@ -4,6 +4,7 @@ import {
   Get,
   Post,
   Res,
+  UnauthorizedException,
   UseGuards,
 } from '@nestjs/common';
 import { AdminService } from './admin.service';
@@ -12,6 +13,8 @@ import { CurrentUser } from './models/user.decorator';
 import { UserDocument } from './models/user.schema';
 import { Response } from 'express';
 import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';
+import { MessagePattern, Payload } from '@nestjs/microservices';
+import { SERVICE_PATTERN } from '@libs/common/constant/service.name';
 
 @Controller()
 export class AdminController {
@@ -24,7 +27,7 @@ export class AdminController {
 
   @Post('login')
   @UseGuards(LocalAuthGuard)
-  async authentication(
+  async login(
     @Res({ passthrough: true }) response: Response,
     @CurrentUser() user: UserDocument,
   ) {
@@ -38,6 +41,16 @@ export class AdminController {
       return { data: user, message: 'Get profile successful!' };
     } catch (error) {
       throw new BadRequestException(error.message);
+    }
+  }
+
+  @MessagePattern(SERVICE_PATTERN.AUTHENTICATION)
+  @UseGuards(JwtAuthGuard)
+  async authenticate(@Payload() data) {
+    try {
+      return data.user;
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
     }
   }
 }

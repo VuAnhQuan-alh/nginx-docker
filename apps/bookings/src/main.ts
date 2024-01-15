@@ -14,7 +14,7 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  app.setGlobalPrefix(VAR_PREFIX);
+  app.setGlobalPrefix(VAR_PREFIX, { exclude: ['healthy'] });
   const config = app.get(ConfigService);
   await app.listen(config.get<number>('PORT_BOOKING'));
 
