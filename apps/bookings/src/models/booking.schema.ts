@@ -1,8 +1,3 @@
-import { AbstractDocument } from '@libs/common/database/abstract.schema';
-import { PromotionDocument } from './promotion.schema';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { SchemaTypes } from 'mongoose';
-import { ServiceDocument } from './service.schema';
 import { Type } from 'class-transformer';
 import {
   IsArray,
@@ -11,6 +6,13 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+import { SchemaTypes } from 'mongoose';
+
+import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
+import { PromotionDocument } from './promotion.schema';
+import { ServiceDocument } from './service.schema';
 
 export type TypeBookingDocument = BookingDocument & Document;
 

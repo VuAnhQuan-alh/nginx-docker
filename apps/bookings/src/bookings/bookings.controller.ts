@@ -1,3 +1,5 @@
+import { MessageQuery } from '@libs/common/constant/messages';
+import { JWTCanAuth } from '@micro/microservice/auth/jwt-auth.canactivate';
 import {
   Body,
   Controller,
@@ -9,11 +11,10 @@ import {
   Req,
   UseGuards,
 } from '@nestjs/common';
-import { BookingsService } from './bookings.service';
+
 import { CreateBookingDTO } from '../dto/create-booking.dto';
-import { MessageQuery } from '@libs/common/constant/messages';
 import { UpdateBookingDTO } from '../dto/update-booking.dto';
-import { JWTCanAuth } from '@micro/microservice/auth/jwt-auth.canactivate';
+import { BookingsService } from './bookings.service';
 
 @Controller('bookings')
 @UseGuards(JWTCanAuth)

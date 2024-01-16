@@ -1,5 +1,3 @@
-import { AbstractDocument } from '@libs/common/database/abstract.schema';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   IsDateString,
   IsNotEmpty,
@@ -8,6 +6,9 @@ import {
   IsString,
   Min,
 } from 'class-validator';
+
+import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type TypeServiceDocument = ServiceDocument & Document;
 

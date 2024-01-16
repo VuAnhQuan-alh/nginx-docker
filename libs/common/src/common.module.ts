@@ -1,10 +1,10 @@
 import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { JwtModule } from '@nestjs/jwt';
 
 import { CommonService } from './common.service';
 import { ConfigModule } from './config/config.module';
 import { InterceptorModule } from './interceptor/interceptor.module';
-import { ConfigService } from '@nestjs/config';
-import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [

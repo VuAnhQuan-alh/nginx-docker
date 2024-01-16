@@ -1,10 +1,11 @@
-import { Module } from '@nestjs/common';
-import { PetsService } from './pets.service';
-import { PetsController } from './pets.controller';
 import { CommonService } from '@libs/common';
 import { DatabasePetModule } from '@libs/common/database/database-pet.module';
-import { PetDocument, PetSchema } from '../models/pet.schema';
+import { Module } from '@nestjs/common';
+
 import { PetRepository } from '../models/pet.repository';
+import { PetDocument, PetSchema } from '../models/pet.schema';
+import { PetsController } from './pets.controller';
+import { PetsService } from './pets.service';
 
 @Module({
   imports: [

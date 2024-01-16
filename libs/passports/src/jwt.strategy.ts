@@ -1,8 +1,10 @@
+import { ExtractJwt, Strategy } from 'passport-jwt';
+
 import { UsersService } from '@admin/auth/users/users.service';
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { PassportStrategy } from '@nestjs/passport';
-import { ExtractJwt, Strategy } from 'passport-jwt';
+
 import { ITokenPayload } from './interfaces/token-payload.interface';
 
 @Injectable()

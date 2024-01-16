@@ -1,10 +1,12 @@
-import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
+import helmet from 'helmet';
+
+import { VAR_PREFIX } from '@libs/common/constant';
 import { HttpExceptionFilter } from '@libs/common/middleware/http-exception';
 import { Logger, ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import { NestFactory } from '@nestjs/core';
-import { VAR_PREFIX } from '@libs/common/constant';
-import helmet from 'helmet';
+
+import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);

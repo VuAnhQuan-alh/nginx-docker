@@ -1,8 +1,9 @@
-import { ClientsModule, Transport } from '@nestjs/microservices';
-import { Module } from '@nestjs/common';
-import { MicroserviceService } from './microservice.service';
-import { ConfigService } from '@nestjs/config';
 import { SERVICE_NAME } from '@libs/common/constant/service.name';
+import { Module } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { ClientsModule, Transport } from '@nestjs/microservices';
+
+import { MicroserviceService } from './microservice.service';
 
 @Module({
   imports: [

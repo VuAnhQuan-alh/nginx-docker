@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
-import { BookingRepository } from '../models/booking.repository';
-import { CreateBookingDTO } from '../dto/create-booking.dto';
-import { BookingDocument } from '../models/booking.schema';
-import { UpdateBookingDTO } from '../dto/update-booking.dto';
 import { CommonService } from '@libs/common';
+import { Injectable } from '@nestjs/common';
+
+import { CreateBookingDTO } from '../dto/create-booking.dto';
+import { UpdateBookingDTO } from '../dto/update-booking.dto';
+import { BookingRepository } from '../models/booking.repository';
+import { BookingDocument } from '../models/booking.schema';
 
 @Injectable()
 export class BookingsService {

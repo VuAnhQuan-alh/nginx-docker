@@ -1,9 +1,10 @@
 import { CommonService } from '@libs/common';
-import { CreateServiceDTO } from '../dto/create-service.dto';
 import { Injectable } from '@nestjs/common';
-import { ServiceDocument } from '../models/service.schema';
-import { ServiceRepository } from '../models/service.repository';
+
+import { CreateServiceDTO } from '../dto/create-service.dto';
 import { UpdateServiceDTO } from '../dto/update-service.dto';
+import { ServiceRepository } from '../models/service.repository';
+import { ServiceDocument } from '../models/service.schema';
 
 @Injectable()
 export class ServicesService {

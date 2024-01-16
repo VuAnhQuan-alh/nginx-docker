@@ -1,9 +1,10 @@
 import { CommonService } from '@libs/common';
-import { CreatePromotionDTO } from '../dto/create-promotion.dto';
 import { Injectable } from '@nestjs/common';
-import { PromotionDocument } from '../models/promotion.schema';
-import { PromotionRepository } from '../models/promotion.repository';
+
+import { CreatePromotionDTO } from '../dto/create-promotion.dto';
 import { UpdatePromotionDTO } from '../dto/update-promotion.dto';
+import { PromotionRepository } from '../models/promotion.repository';
+import { PromotionDocument } from '../models/promotion.schema';
 
 @Injectable()
 export class PromotionsService {

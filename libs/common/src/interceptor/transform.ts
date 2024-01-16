@@ -1,11 +1,13 @@
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 import {
   CallHandler,
   ExecutionContext,
   Injectable,
   NestInterceptor,
 } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
 import { PAGE_SIZE } from '../constant';
 
 interface Response {

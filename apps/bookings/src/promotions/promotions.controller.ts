@@ -1,3 +1,4 @@
+import { MessageQuery } from '@libs/common/constant/messages';
 import {
   Body,
   Controller,
@@ -7,10 +8,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { PromotionsService } from './promotions.service';
+
 import { CreatePromotionDTO } from '../dto/create-promotion.dto';
 import { UpdatePromotionDTO } from '../dto/update-promotion.dto';
-import { MessageQuery } from '@libs/common/constant/messages';
+import { PromotionsService } from './promotions.service';
 
 @Controller('promotions')
 export class PromotionsController {

@@ -1,3 +1,4 @@
+import { MessageQuery } from '@libs/common/constant/messages';
 import {
   Body,
   Controller,
@@ -7,10 +8,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { OwnersService } from './owners.service';
+
 import { CreateOwnerDTO } from '../dto/create-owner.dto';
-import { MessageQuery } from '@libs/common/constant/messages';
 import { UpdateOwnerDTO } from '../dto/update-owner.dto';
+import { OwnersService } from './owners.service';
 
 @Controller('owners')
 export class OwnersController {

@@ -1,6 +1,8 @@
-import { Prop, Schema } from '@nestjs/mongoose';
 import { Transform } from 'class-transformer';
-import { SchemaTypes, Types, now } from 'mongoose';
+import { now, SchemaTypes, Types } from 'mongoose';
+
+import { Prop, Schema } from '@nestjs/mongoose';
+
 import { BaseSchema } from './base.schema';
 
 @BaseSchema({

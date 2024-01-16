@@ -1,9 +1,10 @@
-import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
-import { UserRepository } from '../models/user.repository';
 import { DatabaseAdminModule } from '@libs/common/database/database-admin.module';
+import { Module } from '@nestjs/common';
+
+import { UserRepository } from '../models/user.repository';
 import { UserDocument, UserSchema } from '../models/user.schema';
+import { UsersController } from './users.controller';
+import { UsersService } from './users.service';
 
 @Module({
   imports: [

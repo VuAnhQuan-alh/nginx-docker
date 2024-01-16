@@ -1,3 +1,4 @@
+import { MessageQuery } from '@libs/common/constant/messages';
 import {
   Body,
   Controller,
@@ -7,10 +8,10 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ServicesService } from './services.service';
+
 import { CreateServiceDTO } from '../dto/create-service.dto';
-import { MessageQuery } from '@libs/common/constant/messages';
 import { UpdateServiceDTO } from '../dto/update-service.dto';
+import { ServicesService } from './services.service';
 
 @Controller('services')
 export class ServicesController {

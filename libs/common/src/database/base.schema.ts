@@ -1,6 +1,7 @@
-import { TypeMetadataStorage } from '@nestjs/mongoose/dist/storages/type-metadata.storage';
 import _ from 'lodash';
 import * as mongoose from 'mongoose';
+
+import { TypeMetadataStorage } from '@nestjs/mongoose/dist/storages/type-metadata.storage';
 
 export type SchemaOptions = mongoose.SchemaOptions & {
   inheritOption?: boolean;

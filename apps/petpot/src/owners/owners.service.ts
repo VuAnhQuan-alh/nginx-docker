@@ -1,8 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { OwnerRepository } from '../models/owner.repository';
+
 import { CreateOwnerDTO } from '../dto/create-owner.dto';
-import { OwnerDocument } from '../models/owner.schema';
 import { UpdateOwnerDTO } from '../dto/update-owner.dto';
+import { OwnerRepository } from '../models/owner.repository';
+import { OwnerDocument } from '../models/owner.schema';
 import { PetDocument } from '../models/pet.schema';
 import { PetsService } from '../pets/pets.service';
 

@@ -1,3 +1,4 @@
+import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';
 import {
   Body,
   Controller,
@@ -10,7 +11,6 @@ import {
 } from '@nestjs/common';
 
 import { CreateUserDTO } from '../dto/create-user.dto';
-import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';
 import { UpdateUserDTO } from '../dto/update-user.dto';
 import { UsersService } from './users.service';
 

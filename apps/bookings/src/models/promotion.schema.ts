@@ -1,6 +1,3 @@
-import { TypePromotion } from '@libs/common/constant/enum.fields';
-import { AbstractDocument } from '@libs/common/database/abstract.schema';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   IsDateString,
   IsEnum,
@@ -11,6 +8,10 @@ import {
   Max,
   Min,
 } from 'class-validator';
+
+import { TypePromotion } from '@libs/common/constant/enum.fields';
+import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type TypePromotionDocument = PromotionDocument & Document;
 

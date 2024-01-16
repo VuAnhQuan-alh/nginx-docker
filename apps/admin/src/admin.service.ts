@@ -1,7 +1,8 @@
-import { BadRequestException, Injectable } from '@nestjs/common';
-import { UserDocument } from './models/user.schema';
 import { ITokenPayload } from '@auth/passports/interfaces/token-payload.interface';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+
+import { UserDocument } from './models/user.schema';
 
 @Injectable()
 export class AdminService {

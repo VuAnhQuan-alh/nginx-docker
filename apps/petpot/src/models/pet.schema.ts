@@ -1,5 +1,4 @@
-import { AbstractDocument } from '@libs/common/database/abstract.schema';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import { Type } from 'class-transformer';
 import {
   IsDateString,
   IsNotEmpty,
@@ -9,8 +8,11 @@ import {
   Min,
 } from 'class-validator';
 import { SchemaTypes } from 'mongoose';
+
+import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+
 import { OwnerDocument } from './owner.schema';
-import { Type } from 'class-transformer';
 
 export type TypePetDocument = PetDocument & Document;
 

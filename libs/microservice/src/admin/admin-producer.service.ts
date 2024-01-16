@@ -1,6 +1,7 @@
 import { Inject, Injectable, OnModuleInit } from '@nestjs/common';
-import { ServiceMessage, ServiceName } from '../utils/service';
 import { ClientKafka } from '@nestjs/microservices';
+
+import { ServiceMessage, ServiceName } from '../utils/service';
 
 @Injectable()
 export class AdminProducerService implements OnModuleInit {

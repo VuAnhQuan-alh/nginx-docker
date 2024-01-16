@@ -1,5 +1,3 @@
-import { AbstractDocument } from '@libs/common/database/abstract.schema';
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import {
   IsDateString,
   IsEmail,
@@ -7,6 +5,9 @@ import {
   IsOptional,
   IsString,
 } from 'class-validator';
+
+import { AbstractDocument } from '@libs/common/database/abstract.schema';
+import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
 export type TypeOwnerDocument = OwnerDocument & Document;
 
