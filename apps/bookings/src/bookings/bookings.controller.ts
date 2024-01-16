@@ -15,6 +15,8 @@ import {
 import { CreateBookingDTO } from '../dto/create-booking.dto';
 import { UpdateBookingDTO } from '../dto/update-booking.dto';
 import { BookingsService } from './bookings.service';
+import { Roles } from '@micro/microservice/auth/role-auth.decorator';
+import { TypeRoles } from '@libs/common/constant/enum.fields';
 
 @Controller('bookings')
 @UseGuards(JWTCanAuth)
@@ -31,6 +33,7 @@ export class BookingsController {
   }
 
   @Get()
+  @Roles(TypeRoles.ADMIN)
   async getBookings() {
     const [data, total] = await this.bookingsService.findAll();
     return { data, total, message: MessageQuery.GET_LIST_SUCCESS };

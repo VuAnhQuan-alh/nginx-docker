@@ -35,10 +35,10 @@ export class TransformInterceptor implements NestInterceptor {
 
     return next.handle().pipe(
       map((data: BodyRes) => {
-        const query = context.switchToHttp().getRequest().query;
         const url = context.switchToHttp().getRequest().url;
-        if (url === '/healthy') return data;
+        if (url.includes('healthy')) return data;
 
+        const query = context.switchToHttp().getRequest().query;
         if (data.data instanceof Array) {
           meta = {
             page: +query.page || 1,

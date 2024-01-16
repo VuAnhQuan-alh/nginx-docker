@@ -13,9 +13,12 @@ import {
 import { CreateUserDTO } from '../dto/create-user.dto';
 import { UpdateUserDTO } from '../dto/update-user.dto';
 import { UsersService } from './users.service';
+import { RolesGuard } from '../models/role.guard';
+import { RolesOfAdmin } from '../models/role.decorator';
+import { TypeRoles } from '@libs/common/constant/enum.fields';
 
 @Controller('users')
-@UseGuards(JwtAuthGuard)
+@UseGuards(JwtAuthGuard, RolesGuard)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -26,6 +29,7 @@ export class UsersController {
   }
 
   @Get()
+  @RolesOfAdmin([TypeRoles.ADMIN, TypeRoles.LEADER])
   async getUsers() {
     const [data, total] = await this.usersService.findAll();
     return { data, total, message: 'Get list successful!' };

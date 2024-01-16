@@ -1,4 +1,5 @@
 import {
+  IsArray,
   IsEmail,
   IsNotEmpty,
   IsOptional,
@@ -6,6 +7,7 @@ import {
   IsStrongPassword,
 } from 'class-validator';
 
+import { TypeRoles } from '@libs/common/constant/enum.fields';
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 
@@ -33,5 +35,11 @@ export class UserDocument extends AbstractDocument {
   @IsString()
   @IsNotEmpty()
   password: string;
+
+  @Prop({ default: [TypeRoles.USER] })
+  @IsArray()
+  @IsString({ each: true })
+  @IsOptional()
+  roles: TypeRoles[];
 }
 export const UserSchema = SchemaFactory.createForClass(UserDocument);

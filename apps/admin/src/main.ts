@@ -27,11 +27,10 @@ async function bootstrap() {
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  app.setGlobalPrefix(VAR_PREFIX, { exclude: ['healthy'] });
+  app.setGlobalPrefix(VAR_PREFIX);
 
   await app.startAllMicroservices();
   await app.listen(config.get<number>('PORT_ADMIN'));
-
   Logger.log(
     `🚀 Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`,
   );

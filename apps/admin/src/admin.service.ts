@@ -8,14 +8,15 @@ import { UserDocument } from './models/user.schema';
 export class AdminService {
   constructor(private readonly jwtService: JwtService) {}
 
-  getHello(): string {
-    return 'Hello World ADMIN SERVICE\n';
+  getHello(): { message: string } {
+    return { message: 'Hello World ADMIN SERVICE' };
   }
 
   async login(user: UserDocument) {
     try {
       const tokenPayload: ITokenPayload = {
         userId: user._id.toHexString(),
+        roles: user.roles,
       };
       const token = await this.jwtService.signAsync(tokenPayload);
       return {

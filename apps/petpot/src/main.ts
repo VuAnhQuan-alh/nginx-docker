@@ -10,16 +10,17 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const config = app.get(ConfigService);
+
   app.enableCors();
   app.use(helmet());
 
   app.useGlobalPipes(new ValidationPipe({ whitelist: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
-  app.setGlobalPrefix(VAR_PREFIX, { exclude: ['healthy'] });
-  const config = app.get(ConfigService);
-  await app.listen(config.get<number>('PORT_PET'));
+  app.setGlobalPrefix(VAR_PREFIX);
 
+  await app.listen(config.get<number>('PORT_PET'));
   Logger.log(
     `🚀 Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`,
   );
