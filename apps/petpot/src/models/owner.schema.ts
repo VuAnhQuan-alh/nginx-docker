@@ -1,23 +1,45 @@
 import { AbstractDocument } from '@libs/common/database/abstract.schema';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
+import {
+  IsDateString,
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
-export type TypeOwnerDocument = Owner & Document;
+export type TypeOwnerDocument = OwnerDocument & Document;
 
-@Schema()
-export class Owner extends AbstractDocument {
+@Schema({ timestamps: true })
+export class OwnerDocument extends AbstractDocument {
+  @Prop({ unique: true, required: true })
+  @IsNotEmpty()
+  @IsEmail()
+  email: string;
+
   @Prop({ required: true })
+  @IsNotEmpty()
+  @IsString()
   name: string;
 
   @Prop()
+  @IsOptional()
+  @IsDateString()
   birthday: Date;
 
   @Prop({ required: true })
+  @IsNotEmpty()
+  @IsString()
   phone: string;
 
   @Prop()
+  @IsOptional()
+  @IsString()
   identifier: string;
 
-  @Prop({ required: true })
+  @Prop({ default: null })
+  @IsOptional()
+  @IsString()
   staffId: string;
 }
-export const OwnerSchema = SchemaFactory.createForClass(Owner);
+export const OwnerSchema = SchemaFactory.createForClass(OwnerDocument);

@@ -11,7 +11,7 @@ import {
 
 export type TypeServiceDocument = ServiceDocument & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class ServiceDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
   code: string;

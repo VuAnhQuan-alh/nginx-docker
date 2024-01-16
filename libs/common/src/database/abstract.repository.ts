@@ -7,6 +7,7 @@ import {
   Types,
   UpdateQuery,
 } from 'mongoose';
+import { MessageQuery } from '../constant/messages';
 
 export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   protected abstract readonly logger: Logger;
@@ -20,8 +21,13 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
     return (await data.save()).toJSON() as unknown as TDocument;
   }
 
-  async findOne(query: FilterQuery<TDocument>): Promise<TDocument> {
-    const document = await this.model.findOne(query, {}, { lean: true });
+  async findOne(
+    query: FilterQuery<TDocument>,
+    populate?: PopulateOptions[],
+  ): Promise<TDocument> {
+    const document = await this.model
+      .findOne(query, {}, { lean: true })
+      .populate(populate);
     if (!document) {
       this.logger.warn('Document not fond with filter', query);
       throw new NotFoundException('Document not found.');
@@ -65,6 +71,8 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   }
 
   async findOneAndDelete(query: FilterQuery<TDocument>) {
-    return await this.model.findOneAndDelete(query, { lean: true });
+    const result = await this.model.findOneAndDelete(query, { lean: true });
+    if (result) return result;
+    throw new NotFoundException(MessageQuery.NOT_FOUND_DATA);
   }
 }

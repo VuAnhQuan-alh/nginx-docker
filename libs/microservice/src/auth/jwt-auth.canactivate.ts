@@ -21,7 +21,6 @@ export class JWTCanAuth implements CanActivate {
     context: ExecutionContext,
   ): boolean | Promise<boolean> | Observable<boolean> {
     const jwt = context.switchToHttp().getRequest().headers.authorization;
-
     if (!jwt) return false;
 
     return this.authClient

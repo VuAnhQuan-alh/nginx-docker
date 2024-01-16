@@ -14,7 +14,7 @@ import {
 
 export type TypePromotionDocument = PromotionDocument & Document;
 
-@Schema()
+@Schema({ timestamps: true })
 export class PromotionDocument extends AbstractDocument {
   @Prop({ unique: true, required: true })
   code: string;
