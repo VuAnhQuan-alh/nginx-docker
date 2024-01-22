@@ -27,4 +27,11 @@ export class AdminService {
       throw new BadRequestException(error);
     }
   }
+
+  // connectService() {
+  //   this.authClient.emit(
+  //     ServiceMessage.GET_ADMIN,
+  //     JSON.stringify({ message: 'hello admin service' }),
+  //   );
+  // }
 }

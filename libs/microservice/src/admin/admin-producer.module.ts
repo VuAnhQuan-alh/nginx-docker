@@ -3,6 +3,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 
 import { ServiceConfig } from '../utils/config';
 import { ServiceCenter, ServiceName } from '../utils/service';
+import { AdminProducerService } from './admin-producer.service';
 
 @Module({
   imports: [
@@ -14,5 +15,7 @@ import { ServiceCenter, ServiceName } from '../utils/service';
       },
     ]),
   ],
+  providers: [AdminProducerService],
+  exports: [ClientsModule, AdminProducerService],
 })
 export class AdminProducerModule {}

@@ -2,13 +2,21 @@ import { Response } from 'express';
 
 import { JwtAuthGuard } from '@auth/passports/jwt-auth.guard';
 import { LocalAuthGuard } from '@auth/passports/local-auth.guard';
-import { SERVICE_PATTERN } from '@libs/common/constant/service.name';
-import { Controller, Get, Post, Res, UseGuards } from '@nestjs/common';
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Post,
+  Res,
+  UseGuards,
+  ValidationPipe,
+} from '@nestjs/common';
 import { MessagePattern, Payload } from '@nestjs/microservices';
 
 import { AdminService } from './admin.service';
 import { CurrentUser } from './models/user.decorator';
 import { UserDocument } from './models/user.schema';
+import { ServiceMessage } from '@micro/microservice/utils/service';
 
 @Controller()
 export class AdminController {
@@ -34,9 +42,18 @@ export class AdminController {
     return { data: user, message: 'Get profile successful!' };
   }
 
-  @MessagePattern(SERVICE_PATTERN.AUTHENTICATION)
+  @MessagePattern(ServiceMessage.AUTHENTICATION)
   @UseGuards(JwtAuthGuard)
-  async authenticate(@Payload() data) {
-    return data.user;
+  async authenticate(@Payload(ValidationPipe) data) {
+    try {
+      return data.user;
+    } catch (error) {
+      throw new BadRequestException(error.message);
+    }
+  }
+
+  @MessagePattern(ServiceMessage.GET_ADMIN)
+  helloAdmin(data: { message: string }) {
+    return `Ahi admin day roi - ${data.message}`;
   }
 }

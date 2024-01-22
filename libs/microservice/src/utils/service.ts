@@ -8,12 +8,14 @@ export enum ServiceCenter {
 
 export enum ServiceName {
   ADMIN = 'ADMIN_SERVICE',
+  BOOKING = 'BOOKING_SERVICE',
 }
 
 export enum ServiceConsumer {
-  ADMIN = 'ADMIN_CONSUMER_NEW',
+  PETPOT = 'PETPOT_CONNECTION',
 }
 
 export enum ServiceMessage {
   GET_ADMIN = 'ADMIN.GET',
+  AUTHENTICATION = 'AUTHENTICATION',
 }

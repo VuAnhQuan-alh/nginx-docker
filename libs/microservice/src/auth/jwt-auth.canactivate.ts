@@ -1,10 +1,6 @@
 import { catchError, map, Observable, tap } from 'rxjs';
 
 import {
-  SERVICE_NAME,
-  SERVICE_PATTERN,
-} from '@libs/common/constant/service.name';
-import {
   CanActivate,
   ExecutionContext,
   ForbiddenException,
@@ -14,14 +10,15 @@ import {
   UnauthorizedException,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { ClientProxy } from '@nestjs/microservices';
+import { ClientKafka } from '@nestjs/microservices';
+import { ServiceMessage, ServiceName } from '../utils/service';
 
 @Injectable()
 export class JWTCanAuth implements CanActivate {
   private readonly logger = new Logger(JWTCanAuth.name);
 
   constructor(
-    @Inject(SERVICE_NAME.AUTH_SERVICE) private readonly authClient: ClientProxy,
+    @Inject(ServiceName.ADMIN) private readonly authClient: ClientKafka,
     private readonly reflector: Reflector,
   ) {}
 
@@ -33,7 +30,7 @@ export class JWTCanAuth implements CanActivate {
 
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
     return this.authClient
-      .send(SERVICE_PATTERN.AUTHENTICATION, {
+      .send(ServiceMessage.AUTHENTICATION, {
         headers: {
           authorization: jwt,
         },

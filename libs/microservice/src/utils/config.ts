@@ -4,11 +4,11 @@ export const ServiceConfig = {
   [ServiceCenter.ADMIN]: {
     client: {
       clientId: ServiceCenter.ADMIN,
-      brokers: [],
+      brokers: [process.env.KAFKA_BROKER],
     },
     subscribe: { fromBeginning: true },
     consumer: {
-      groupId: ServiceConsumer.ADMIN,
+      groupId: ServiceConsumer.PETPOT,
     },
   },
 };

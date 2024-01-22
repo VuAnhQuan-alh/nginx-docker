@@ -8,16 +8,21 @@ import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices';
 
 import { AdminModule } from './admin.module';
+import { ServiceConsumer } from '@micro/microservice/utils/service';
 
 async function bootstrap() {
   const app = await NestFactory.create(AdminModule);
   const config = app.get(ConfigService);
 
   app.connectMicroservice({
-    transport: Transport.TCP,
+    transport: Transport.KAFKA,
     options: {
-      host: config.get<string>('TCP_HOST'),
-      port: config.get<number>('TCP_PORT'),
+      client: {
+        brokers: [config.get<string>('KAFKA_BROKER')],
+      },
+      consumer: {
+        groupId: ServiceConsumer.PETPOT,
+      },
     },
   });
 
