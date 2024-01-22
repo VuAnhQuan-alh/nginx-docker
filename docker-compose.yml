@@ -1,4 +1,9 @@
 version: '3'
+
+networks:
+  petpot_network:
+    driver: bridge
+
 services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -7,6 +12,8 @@ services:
       ZOOKEEPER_TICK_TIME: 2000
     ports:
       - 22181:2181
+    networks:
+      - petpot_network
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -21,6 +28,8 @@ services:
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    networks:
+      - petpot_network
 
   admin:
     build:
@@ -33,6 +42,8 @@ services:
       - kafka
     ports:
       - 4050:4050
+    networks:
+      - petpot_network
 
   booking:
     build:
@@ -45,6 +56,8 @@ services:
       - kafka
     ports:
       - 4070:4070
+    networks:
+      - petpot_network
 
   petpot:
     build:
@@ -57,3 +70,5 @@ services:
       - kafka
     ports:
       - 4030:4030
+    networks:
+      - petpot_network
