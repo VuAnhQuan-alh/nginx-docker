@@ -7,13 +7,8 @@ services:
       dockerfile: ./Dockerfile.admin
     env_file:
       - .env
-    depends_on:
-      - zookeeper
-      - kafka
     ports:
       - 4050:4050
-    networks:
-      - petpot_network
 
   booking:
     build:
@@ -21,13 +16,8 @@ services:
       dockerfile: ./Dockerfile.booking
     env_file:
       - .env
-    depends_on:
-      - zookeeper
-      - kafka
     ports:
       - 4070:4070
-    networks:
-      - petpot_network
 
   petpot:
     build:
@@ -35,10 +25,5 @@ services:
       dockerfile: ./Dockerfile.petpot
     env_file:
       - .env
-    depends_on:
-      - zookeeper
-      - kafka
     ports:
       - 4030:4030
-    networks:
-      - petpot_network
