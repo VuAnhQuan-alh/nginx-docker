@@ -1,5 +1,9 @@
 version: '3.8'
 
+networks:
+  petpot_network:
+    driver: bridge
+
 services:
   admin:
     build:
@@ -10,7 +14,7 @@ services:
     ports:
       - 4050:4050
     networks:
-      - petpot_petpot_network
+      - petpot_network
 
   booking:
     build:
@@ -21,7 +25,7 @@ services:
     ports:
       - 4070:4070
     networks:
-      - petpot_petpot_network
+      - petpot_network
 
   petpot:
     build:
@@ -32,4 +36,4 @@ services:
     ports:
       - 4030:4030
     networks:
-      - petpot_petpot_network
+      - petpot_network
