@@ -15,7 +15,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   Sentry.init({
-    dsn: config.get<string>('SENTRY_DNS'),
+    dsn: config.get<string>('PETPOT_SENTRY_DNS'),
   });
   const { httpAdapter } = app.get(HttpAdapterHost);
 
