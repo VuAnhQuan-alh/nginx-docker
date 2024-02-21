@@ -52,7 +52,9 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
-    depends_on: *default-depends_on
+    depends_on:
+      - postgres
+      - redis
     ports:
       - 22181:2181
     networks:
@@ -73,7 +75,6 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     networks:
       - petpot_network
-
 
   admin:
     build:
