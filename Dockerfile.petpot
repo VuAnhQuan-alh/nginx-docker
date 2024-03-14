@@ -23,4 +23,4 @@ COPY --chown=node:node --from=build /usr/src/app/dist/apps/petpot ./dist/apps/pe
 
 RUN ls ./dist/apps
 
-CMD ["node", "dist/apps/petpot/main"]
+CMD ["pm2-runtime", "dist/apps/petpot/main.js", "--name", "petpot"]

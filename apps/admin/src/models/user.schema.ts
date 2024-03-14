@@ -2,6 +2,7 @@ import {
   IsArray,
   IsEmail,
   IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
   IsStrongPassword,
@@ -41,5 +42,10 @@ export class UserDocument extends AbstractDocument {
   @IsString({ each: true })
   @IsOptional()
   roles: TypeRoles[];
+
+  @Prop({ default: 0 })
+  @IsNumber()
+  @IsOptional()
+  point: number;
 }
 export const UserSchema = SchemaFactory.createForClass(UserDocument);

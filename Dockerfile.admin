@@ -21,4 +21,4 @@ ENV NODE_ENV=${NODE_ENV}
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist/apps/admin ./dist/apps/admin
 
-CMD ["node", "dist/apps/admin/main"]
+CMD ["pm2-runtime", "dist/apps/admin/main.js", "--name", "admin"]

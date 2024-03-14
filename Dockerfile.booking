@@ -23,4 +23,4 @@ COPY --chown=node:node --from=build /usr/src/app/dist/apps/bookings ./dist/apps/
 RUN ls 
 
 
-CMD ["node", "dist/apps/bookings/main"]
+CMD ["pm2-runtime", "dist/apps/bookings/main.js", "--name", "booking"]
