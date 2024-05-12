@@ -1,0 +1,23 @@
+services:
+  tenant_hkt:
+    restart: unless-stopped
+    env_file: .env
+    image: postgres:15.1-alpine
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123456aA@
+      POSTGRES_DB: tenant_hkt
+    volumes:
+      - postgres_hkt:/data/postgres
+    ports:
+      - '5432:5432'
+    networks:
+      - petpot_network
+
+volumes:
+  postgres_hkt:
+    driver: local
+
+networks:
+  petpot_network:
+    driver: bridge

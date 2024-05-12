@@ -61,6 +61,15 @@
       "compilerOptions": {
         "tsConfigPath": "libs/passports/tsconfig.lib.json"
       }
+    },
+    "hero": {
+      "type": "application",
+      "root": "apps/hero",
+      "entryFile": "main",
+      "sourceRoot": "apps/hero/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/hero/tsconfig.app.json"
+      }
     }
   },
   "monorepo": true,

@@ -2,16 +2,16 @@ import { Module } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 
-import { DatabaseModuleDefinitions } from './database.module';
+import { DatabaseMongodbDefinitions } from './database.mongo';
 
 @Module({
   imports: [
     MongooseModule.forRootAsync({
       useFactory: (config: ConfigService) => ({
-        uri: config.get<string>('MONGOOSE_URI_BOOKING'),
+        uri: config.getOrThrow<string>('MONGOOSE_URI_BOOKING'),
       }),
       inject: [ConfigService],
     }),
   ],
 })
-export class DatabaseBookingModule extends DatabaseModuleDefinitions {}
+export class DatabaseBookingModule extends DatabaseMongodbDefinitions {}

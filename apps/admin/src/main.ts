@@ -17,7 +17,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   Sentry.init({
-    dsn: config.get<string>('ADMIN_SENTRY_DNS'),
+    dsn: config.getOrThrow<string>('ADMIN_SENTRY_DNS'),
   });
   const { httpAdapter } = app.get(HttpAdapterHost);
 
@@ -25,7 +25,7 @@ async function bootstrap() {
     transport: Transport.KAFKA,
     options: {
       client: {
-        brokers: [config.get<string>('KAFKA_BROKER')],
+        brokers: [config.getOrThrow<string>('KAFKA_BROKER')],
       },
       consumer: {
         groupId: ServiceConsumer.PETPOT,
@@ -45,7 +45,7 @@ async function bootstrap() {
   app.setGlobalPrefix(VAR_PREFIX);
 
   await app.startAllMicroservices();
-  await app.listen(config.get<number>('PORT_ADMIN'));
+  await app.listen(config.getOrThrow<number>('PORT_ADMIN'));
   Logger.log(
     `🚀 Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`,
   );

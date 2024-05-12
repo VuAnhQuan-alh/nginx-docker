@@ -9,7 +9,7 @@ import {
 } from '@nestjs/common';
 
 @Injectable()
-class AppLoggerMiddleware implements NestMiddleware {
+export class AppLoggerMiddleware implements NestMiddleware {
   private logger = new Logger('HTTP');
 
   use(request: Request, response: Response, next: NextFunction) {
@@ -43,4 +43,4 @@ export class AppLoggerModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
     consumer.apply(AppLoggerMiddleware).forRoutes('*');
   }
-}
+} // 4030

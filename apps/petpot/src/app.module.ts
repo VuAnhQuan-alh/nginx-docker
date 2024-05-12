@@ -13,4 +13,4 @@ import { PetsModule } from './pets/pets.module';
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule extends AppLoggerModule {}
+export class AppModule extends AppLoggerModule {} // 4030

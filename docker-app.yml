@@ -37,3 +37,14 @@ services:
       - 4030:4030
     networks:
       - petpot_network
+
+  hero:
+    build:
+      context: .
+      dockerfile: ./Dockerfile.hero
+    env_file:
+      - .env
+    ports:
+      - 4010:4010
+    networks:
+      - petpot_network

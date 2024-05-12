@@ -15,7 +15,7 @@ async function bootstrap() {
   const config = app.get(ConfigService);
 
   Sentry.init({
-    dsn: config.get<string>('PETPOT_SENTRY_DNS'),
+    dsn: config.getOrThrow<string>('PETPOT_SENTRY_DNS'),
   });
   const { httpAdapter } = app.get(HttpAdapterHost);
 
@@ -30,7 +30,7 @@ async function bootstrap() {
 
   app.setGlobalPrefix(VAR_PREFIX);
 
-  await app.listen(config.get<number>('PORT_PET'));
+  await app.listen(config.getOrThrow<number>('PORT_PET'));
   Logger.log(
     `🚀 Application is running on: ${await app.getUrl()}/${VAR_PREFIX}`,
   );

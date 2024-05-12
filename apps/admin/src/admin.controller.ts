@@ -39,6 +39,7 @@ export class AdminController {
   @Get('profile')
   @UseGuards(JwtAuthGuard)
   async information(@CurrentUser() user: UserDocument) {
+    delete user.password;
     return { data: user, message: 'Get profile successful!' };
   }
 

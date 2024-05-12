@@ -31,7 +31,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
       .findOne(query, {}, { lean: true })
       .populate(populate);
     if (!document) {
-      this.logger.warn('Document not fond with filter', query);
+      this.logger.warn('Document not found with filter', query);
       throw new NotFoundException('Document not found.');
     }
     return document as TDocument;
@@ -46,7 +46,7 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
       new: true,
     });
     if (!document) {
-      this.logger.warn('Document not fond with filter', query);
+      this.logger.warn('Document not found with filter', query);
       throw new NotFoundException('Document not found.');
     }
     return document as TDocument;
@@ -73,8 +73,10 @@ export abstract class AbstractRepository<TDocument extends AbstractDocument> {
   }
 
   async findOneAndDelete(query: FilterQuery<TDocument>) {
-    const result = await this.model.findOneAndDelete(query, { lean: true });
+    const result = await this.model.deleteMany(query, { lean: true });
     if (result) return result;
+
+    this.logger.warn('Document not found with filter', query);
     throw new NotFoundException(MessageQuery.NOT_FOUND_DATA);
   }
 }

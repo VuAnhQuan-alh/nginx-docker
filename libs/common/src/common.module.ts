@@ -13,9 +13,9 @@ import { InterceptorModule } from './interceptor/interceptor.module';
     JwtModule.registerAsync({
       useFactory: (config: ConfigService) => {
         return {
-          secret: config.get<string>('JWT_SECRET'),
+          secret: config.getOrThrow<string>('JWT_SECRET'),
           signOptions: {
-            expiresIn: `${config.get<number>('JWT_EXPIRES')}s`,
+            expiresIn: `${config.getOrThrow<number>('JWT_EXPIRES')}s`,
           },
         };
       },
