@@ -1,3 +1,5 @@
+import { NextFunction, Request, Response } from 'express';
+
 import {
   Injectable,
   Logger,
@@ -5,13 +7,13 @@ import {
   NestMiddleware,
   NestModule,
 } from '@nestjs/common';
-import { DatabaseService } from '../database/database.service';
-import { NextFunction, Request, Response } from 'express';
+
+// import { DatabaseService } from '../database/database.service';
 import { AppLoggerMiddleware } from './logger-request';
 
 @Injectable()
 export class TenantConnectMiddleware implements NestMiddleware {
-  constructor(private readonly databaseService: DatabaseService) {}
+  // constructor(private readonly databaseService: DatabaseService) {}
   private logger = new Logger('XTenantId');
 
   async use(req: Request, res: Response, next: NextFunction) {
@@ -22,13 +24,13 @@ export class TenantConnectMiddleware implements NestMiddleware {
       return res.status(400).send({ message: 'Tenant ID is required!' });
     }
 
-    const database = await this.databaseService.getConnection(tenantId);
-    if (!database) {
-      this.logger.error('Tenant ID not exist');
-      return res.status(400).send({ message: 'Tenant ID is does not exist!' });
-    }
+    // const database = await this.databaseService.getConnection(tenantId);
+    // if (!database) {
+    //   this.logger.error('Tenant ID not exist');
+    //   return res.status(400).send({ message: 'Tenant ID is does not exist!' });
+    // }
 
-    req['dbConnection'] = database;
+    // req['dbConnection'] = database;
     next();
   }
 }

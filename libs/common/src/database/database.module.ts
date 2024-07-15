@@ -1,18 +1,17 @@
-import { DynamicModule, Global, Module, Scope } from '@nestjs/common';
+import { DynamicModule, Module, Scope } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseService } from './database.service';
-import { DataSourceFactory } from './database.factory';
-import { DataSource } from 'typeorm';
 
-@Global()
+import { DataSourceFactory } from './database.provider';
+import { DatabaseService } from './database.service';
+
 @Module({})
 export class DatabaseModule {
   static register(scopeType: Scope): DynamicModule {
     return {
       module: DatabaseModule,
-      imports: [ConfigModule, DataSource],
+      imports: [ConfigModule],
       providers: [DataSourceFactory[scopeType], DatabaseService],
-      exports: ['DATA_SOURCE', DataSource, DatabaseService],
+      exports: ['DATA_SOURCE', DatabaseService],
     };
   }
 }

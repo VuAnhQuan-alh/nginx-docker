@@ -1,6 +1,8 @@
-import { Provider, Scope } from '@nestjs/common';
-import { REQUEST } from '@nestjs/core';
 import { DataSource } from 'typeorm';
+
+import { BadRequestException, Provider, Scope } from '@nestjs/common';
+import { REQUEST } from '@nestjs/core';
+
 import { XTenantId } from '../constant';
 import { DatabaseService } from './database.service';
 
@@ -13,7 +15,7 @@ export const DataSourceFactory: { [key: string]: Provider } = {
   },
   [Scope.REQUEST]: {
     provide: 'DATA_SOURCE',
-    inject: [REQUEST, DataSource],
+    inject: [REQUEST],
     scope: Scope.REQUEST,
     useFactory: async (
       req,
@@ -23,10 +25,10 @@ export const DataSourceFactory: { [key: string]: Provider } = {
       console.log('vao day roi', { tenant });
 
       if (tenant) {
-        const database = await databaseService.getConnection(tenant);
-        return database;
+        const databaseName = await databaseService.getDatabaseName(tenant);
+        return databaseService.getDBDataSource(databaseName);
       } else {
-        return null;
+        throw new BadRequestException('Missing x-tenant-id header');
       }
     },
   },
